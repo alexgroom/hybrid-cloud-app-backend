@@ -1,0 +1,20 @@
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hybrid-cloud-backend
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "5"
+        autoscaling.knative.dev/target: "10"
+    spec:
+      containers:
+        - image: quay.io/kameshsampath/hybrid-cloud-kn
+          livenessProbe:
+            httpGet:
+              path: /health/live
+          readinessProbe:
+            httpGet:
+              path: /health/ready
