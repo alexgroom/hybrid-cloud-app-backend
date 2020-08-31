@@ -11,7 +11,7 @@ spec:
         autoscaling.knative.dev/target: "10"
     spec:
       containers:
-        - image: quay.io/kameshsampath/hybrid-cloud-kn
+        - image: image-registry.openshift-imageregistry.svc:5000/hybrid-cloud-demo/hybrid-cloud-demo-backend
           livenessProbe:
             httpGet:
               path: /health/live
