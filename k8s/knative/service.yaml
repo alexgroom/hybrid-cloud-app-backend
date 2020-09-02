@@ -7,9 +7,11 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/maxScale: "5"
-        autoscaling.knative.dev/target: "10"
+        autoscaling.knative.dev/maxScale: "2"
+        autoscaling.knative.dev/window: "16s"
     spec:
+      serviceAccountName: hybrid-cloud-demo-sa
+      containerConcurrency: 1
       containers:
         - image: quay.io/rhdevelopers/hybrid-cloud-demo-backend
           livenessProbe:

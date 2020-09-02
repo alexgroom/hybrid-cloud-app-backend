@@ -5,6 +5,7 @@ metadata:
   annotations:
     skupper.io/proxy: http
     skupper.io/target: hybrid-cloud-backend.hybrid-cloud-demo
+    app.kubernetes.io/part-of: hybrid-cloud-demo
   name: hybrid-cloud-backend-skupper
 spec:
   ports:

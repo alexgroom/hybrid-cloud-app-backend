@@ -5,13 +5,6 @@ kind: Kustomization
 # Adds namespace to all resources.
 namespace: hybrid-cloud-demo
 
-# Adds hybrid-cloud-demo label to all resources.
-commonLabels:
-  app.kubernetes.io/part-of: hybrid-cloud-demo
-
-generatorOptions:
-  disableNameSuffixHash: true
-
 resources:
   - service.yaml
   - knative-skupper-proxy.yaml
