@@ -8,7 +8,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import io.fabric8.kubernetes.api.model.Namespace;
@@ -23,6 +22,7 @@ public class CloudIdentifierService {
 
   @Produces
   @Named("cloud-id")
+  @SuppressWarnings("unchecked")
   public String whichCloud() {
 
     NamespaceList namespaces = kubernetesClient.namespaces().list();

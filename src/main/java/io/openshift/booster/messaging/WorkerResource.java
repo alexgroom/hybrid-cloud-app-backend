@@ -1,7 +1,5 @@
 package io.openshift.booster.messaging;
 
-import java.util.UUID;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Consumes;
@@ -16,8 +14,9 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class WorkerResource {
 
-  private static final String ID = "worker-quarkus-" + UUID.randomUUID().toString().substring(0, 4);
-
+  @Inject
+  @Named("worker-id")
+  String workerId;
 
   @Inject
   @Named("cloud-id")
@@ -34,7 +33,7 @@ public class WorkerResource {
   public Response process(Message message) {
     System.out.println(message);
     Response response =
-        new Response(message.getRequestId(), ID, cloudId, process(message.getRequest()));
+        new Response(message.getRequestId(), workerId, cloudId, process(message.getRequest()));
     return response;
   }
 
