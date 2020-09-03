@@ -23,7 +23,7 @@ spec:
                 fieldRef:
                   fieldPath: "metadata.namespace"
           image: quay.io/rhdevelopers/hybrid-cloud-demo-backend
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: hybrid-cloud-backend
           ports:
             - containerPort: 8080

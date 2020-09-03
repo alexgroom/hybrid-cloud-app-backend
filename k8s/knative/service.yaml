@@ -14,6 +14,7 @@ spec:
       containerConcurrency: 1
       containers:
         - image: quay.io/rhdevelopers/hybrid-cloud-demo-backend
+          imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /health/live
