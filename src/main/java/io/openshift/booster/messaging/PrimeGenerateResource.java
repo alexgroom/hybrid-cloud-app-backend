@@ -14,10 +14,13 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @Path("/api")
 public class PrimeGenerateResource {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(PrimeGenerateResource.class);
+  private final Logger LOGGER = LoggerFactory.getLogger(PrimeGenerateResource.class);
 
   @Inject
   PrimeService primeService;
+
+  @Inject
+  Utils utils;
 
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
@@ -32,11 +35,11 @@ public class PrimeGenerateResource {
         sleepInSeconds, memLoad);
 
     if (sleepInSeconds != 0) {
-      sleepInSeconds(sleepInSeconds);
+      utils.sleepInSeconds(sleepInSeconds);
     }
 
     if (memLoad != 0) {
-      loadMemory(memLoad);
+      utils.loadMemory(memLoad);
     }
 
     if (upto <= 1) {
@@ -50,25 +53,6 @@ public class PrimeGenerateResource {
     return Response.ok(Json.encodePrettily(result)).build();
   }
 
-  /**
-   * @param size
-   */
-  private void loadMemory(int size) {
-    byte[] b = new byte[size];
-    b[0] = 1;
-    b[b.length - 1] = 1;
-    LOGGER.info("Allocated memory {} mb", size);
-  }
 
-  /**
-   * @param seconds
-   */
-  private void sleepInSeconds(int seconds) {
-    try {
-      SECONDS.sleep(seconds);
-      LOGGER.info("Slept for {} seconds", seconds);
-    } catch (InterruptedException e) {
 
-    }
-  }
 }

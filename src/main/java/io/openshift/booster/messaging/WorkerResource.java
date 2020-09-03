@@ -8,11 +8,15 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/api")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class WorkerResource {
+
+  private final Logger LOGGER = LoggerFactory.getLogger(WorkerResource.class);
 
   @Inject
   @Named("worker-id")
@@ -21,6 +25,9 @@ public class WorkerResource {
   @Inject
   @Named("cloud-id")
   String cloudId;
+
+  @Inject
+  Utils utils;
 
   @GET
   @Path("/cloud")
@@ -31,7 +38,15 @@ public class WorkerResource {
   @POST
   @Path("/process")
   public Response process(Message message) {
-    System.out.println(message);
+
+    var sleepInMillis = message.getRequest().getSleepInMillis();
+
+    if (sleepInMillis != 0) {
+      LOGGER.info("Sleeping for {} milliseconds ", sleepInMillis);
+      utils.sleepInMilliSeconds(sleepInMillis);
+    }
+    LOGGER.info("Processing message {} ", message);
+
     Response response =
         new Response(message.getRequestId(), workerId, cloudId, process(message.getRequest()));
     return response;

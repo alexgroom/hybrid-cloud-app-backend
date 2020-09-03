@@ -16,7 +16,7 @@ public class Message {
     public Request getRequest() {
         return request;
     }
-    
+
     public String getRequestId() {
         return requestId;
     }
