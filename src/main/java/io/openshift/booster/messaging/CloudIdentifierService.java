@@ -25,20 +25,24 @@ public class CloudIdentifierService {
   @SuppressWarnings("unchecked")
   public String whichCloud() {
 
-    NamespaceList namespaces = kubernetesClient.namespaces().list();
+    try {
+      NamespaceList namespaces = kubernetesClient.namespaces().list();
 
-    Optional<Namespace> optNS = namespaces.getItems().stream()
-        .filter(n -> n.getMetadata().getName().equals("openshift-kube-apiserver")).findFirst();
+      Optional<Namespace> optNS = namespaces.getItems().stream()
+          .filter(n -> n.getMetadata().getName().equals("openshift-kube-apiserver")).findFirst();
 
-    if (optNS.isPresent()) {
-      String configYAML = kubernetesClient.configMaps().inNamespace("openshift-kube-apiserver")
-          .withName("config").get().getData().get("config.yaml");
-      Yaml yaml = new Yaml(new Constructor(Map.class));
-      Map<String, Object> map = yaml.load(new StringReader(configYAML));
-      Map<String, Object> apiServerArgs = (Map<String, Object>) map.get("apiServerArguments");
-      ArrayList<String> cloudProviders = (ArrayList<String>) apiServerArgs.get("cloud-provider");
-      System.out.println(cloudProviders.get(0));
-      return String.valueOf(cloudProviders.get(0));
+      if (optNS.isPresent()) {
+        String configYAML = kubernetesClient.configMaps().inNamespace("openshift-kube-apiserver")
+            .withName("config").get().getData().get("config.yaml");
+        Yaml yaml = new Yaml(new Constructor(Map.class));
+        Map<String, Object> map = yaml.load(new StringReader(configYAML));
+        Map<String, Object> apiServerArgs = (Map<String, Object>) map.get("apiServerArguments");
+        ArrayList<String> cloudProviders = (ArrayList<String>) apiServerArgs.get("cloud-provider");
+        System.out.println(cloudProviders.get(0));
+        return String.valueOf(cloudProviders.get(0));
+      }
+    } catch (Exception e) {
+       //if any error happens getting the cloud provider return unknown
     }
 
     return "unknown";

@@ -8,7 +8,7 @@ import javax.inject.Named;
 @ApplicationScoped
 public class WorkerIdService {
     
-    @Named
+    @Named("worker-id")
     @Produces
     public String workerId(){
         return "worker-quarkus-" + UUID.randomUUID().toString().substring(0, 4);
