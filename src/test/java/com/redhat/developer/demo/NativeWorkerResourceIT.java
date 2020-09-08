@@ -1,4 +1,4 @@
-package io.openshift.booster.messaging;
+package com.redhat.developer.demo;
 
 import io.quarkus.test.junit.NativeImageTest;
 

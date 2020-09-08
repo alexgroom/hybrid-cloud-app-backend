@@ -1,4 +1,4 @@
-package io.openshift.booster.messaging;
+package com.redhat.developer.demo;
 
 import javax.inject.Inject;
 import javax.inject.Named;

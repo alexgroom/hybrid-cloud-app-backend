@@ -1,4 +1,4 @@
-package io.openshift.booster.messaging;
+package com.redhat.developer.demo;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class CloudIdentifierService {
         return String.valueOf(cloudProviders.get(0));
       }
     } catch (Exception e) {
-       //if any error happens getting the cloud provider return unknown
+      // if any error happens getting the cloud provider return unknown
     }
 
     return "unknown";

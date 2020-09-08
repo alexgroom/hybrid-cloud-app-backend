@@ -1,4 +1,4 @@
-package io.openshift.booster.messaging;
+package com.redhat.developer.demo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

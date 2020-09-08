@@ -1,7 +1,7 @@
-package io.openshift.booster.messaging;
+package com.redhat.developer.demo;
 
 public class Response {
-    
+
     private final String requestId;
     private final String workerId;
     private final String cloudId;
@@ -32,8 +32,8 @@ public class Response {
 
     @Override
     public String toString() {
-        return String.format("Response{requestId=%s, workerId=%s, cloudId=%s, text=%s}",
-                             requestId, workerId, cloudId, text);
+        return String.format("Response{requestId=%s, workerId=%s, cloudId=%s, text=%s}", requestId,
+                workerId, cloudId, text);
     }
-    
+
 }

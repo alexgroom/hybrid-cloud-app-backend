@@ -1,15 +1,16 @@
-package io.openshift.booster.messaging;
+package com.redhat.developer.demo;
 
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
-import javax.inject.Inject;
-import javax.json.bind.Jsonb;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Path("/api")
 public class PrimeGenerateResource {

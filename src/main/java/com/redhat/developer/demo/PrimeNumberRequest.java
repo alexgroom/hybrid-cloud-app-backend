@@ -1,4 +1,4 @@
-package io.openshift.booster.messaging;
+package com.redhat.developer.demo;
 
 public class PrimeNumberRequest {
 
