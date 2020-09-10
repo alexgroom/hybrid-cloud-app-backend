@@ -13,7 +13,8 @@ spec:
       serviceAccountName: hybrid-cloud-demo-sa
       containerConcurrency: 1
       containers:
-        - image: quay.io/rhdevelopers/hybrid-cloud-demo-backend
+        - name: user-container
+          image: image-registry.openshift-image-registry.svc:5000/hybrid-cloud-demo/hybrid-cloud-backend:v1
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
